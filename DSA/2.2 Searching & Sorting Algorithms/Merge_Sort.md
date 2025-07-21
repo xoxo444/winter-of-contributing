@@ -226,6 +226,8 @@ int main() {
 }
 ```
 
+![image](https://media.geeksforgeeks.org/wp-content/uploads/20240926172924/Heap-Sort-Recursive-Illustration.webp)
+
 
 ## ⏰ Time and Space Complexity
 
