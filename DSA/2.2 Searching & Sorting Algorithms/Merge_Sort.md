@@ -137,3 +137,126 @@ Also, **Space Complexity** of Merge Sort = Space Complexity of Merging + Size of
 1. https://www.enjoyalgorithms.com/blog/merge-sort-algorithm
 2. https://www.geeksforgeeks.org/merge-sort/
 3. https://en.wikipedia.org/wiki/Merge_sort
+
+
+
+Here is the complete **Quick Sort write-up** that you can directly copy and paste into your GitHub `README.md` or any markdown file:
+
+---
+
+# Quick Sort
+
+## 📖 Introduction
+
+Quick Sort is a widely used and efficient sorting algorithm based on the **Divide and Conquer** technique. Unlike Merge Sort, Quick Sort works by selecting a pivot element and partitioning the array around the pivot such that elements less than the pivot are on the left, and elements greater are on the right. It then recursively sorts the sub-arrays.
+
+
+## 💡 Intuition behind Quick Sort
+
+The algorithm selects a pivot and reorders the array so that all elements less than the pivot come before it and all elements greater come after. This step is known as *partitioning*. After partitioning, the pivot is in its final sorted position. This process is recursively applied to the sub-arrays formed by splitting at the pivot.
+
+
+## 🧾 Pseudo Code
+
+```
+QuickSort(arr[], low, high):
+  if (low < high):
+    1. pi = Partition(arr, low, high)
+    2. QuickSort(arr, low, pi - 1)
+    3. QuickSort(arr, pi + 1, high)
+
+Partition(arr[], low, high):
+  1. Choose the pivot (usually the last element)
+  2. Rearrange elements by comparing with pivot
+  3. Return index of pivot after partition
+```
+
+## 💻 Code (C)
+
+```c
+#include <stdio.h>
+
+void swap(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high]; 
+    int i = low - 1;      
+    for (int j = low; j < high; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
+    }
+
+    swap(&arr[i + 1], &arr[high]);
+    return i + 1;
+}
+
+void quicksort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quicksort(arr, low, pi - 1);
+        quicksort(arr, pi + 1, high);
+    }
+}
+
+void printarray(int arr[], int size) {
+    for (int i = 0; i < size; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
+
+int main() {
+    int arr[] = {10, 7, 8, 9, 1, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Original array: ");
+    printarray(arr, n);
+
+    quicksort(arr, 0, n - 1);
+
+    printf("Sorted array:   ");
+    printarray(arr, n);
+
+    return 0;
+}
+```
+
+
+## ⏰ Time and Space Complexity
+
+| Case    | Time Complexity |
+| ------- | --------------- |
+| Best    | O(n log n)      |
+| Average | O(n log n)      |
+| Worst   | O(n²)           |
+
+* **Space Complexity**: O(log n) (due to recursion stack)
+* **In-place**: Yes
+* **Stable**: No
+
+## 📝 Applications
+
+1. Quick Sort is used in many libraries as the default sorting algorithm (e.g., Python's TimSort is a hybrid).
+2. Efficient for large datasets that fit in memory.
+3. Useful in scenarios requiring in-place sorting with minimal space.
+
+
+## ❗ Drawbacks
+
+1. Worst-case performance is O(n²), though mitigated using randomized pivoting.
+2. Not stable: identical elements may not preserve input order.
+3. Recursive implementation can lead to stack overflow if not optimized.
+
+
+## 📚 References
+
+1. [GeeksforGeeks: Quick Sort](https://www.geeksforgeeks.org/quick-sort/)
+2. [Wikipedia: Quicksort](https://en.wikipedia.org/wiki/Quicksort)
+3. [Programiz: Quick Sort](https://www.programiz.com/dsa/quick-sort)
+
+
